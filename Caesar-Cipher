@@ -1,0 +1,36 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+def caesar(command, input, num_shift):
+    result = ""
+    if command == "encode" or command == "decode":
+        if command == "decode":
+            num_shift *= -1
+        for char in input:
+            if char in alphabet:
+                let = alphabet.index(char) + num_shift % 26
+                result += alphabet[let]
+            else:    
+                result += char
+                
+        print(f"The {command}d text is \"{result}\".")
+
+
+continuation = True
+
+while continuation:
+    caesar(command = direction, input = text, num_shift = shift)
+    
+    more = input("Do you want to encode or decode another text? Y or N ").lower()
+    if more == "y":
+        continuation = True
+        direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+        text = input("Type your message:\n").lower()
+        shift = int(input("Type the shift number:\n"))
+
+    else:
+        print("Goodbye!")
+        continuation = False
